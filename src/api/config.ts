@@ -1,0 +1,2 @@
+export const MILLISECOND_DELAY=5200
+export const DISABLE_TIMEOUT=false
