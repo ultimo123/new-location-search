@@ -28,7 +28,7 @@ const SearchResult = () => {
     if (status === 200) {
       setLocationData(data)
     } else {
-    setLoading(false)
+      setLoading(false)
       navigation(
         new QueryBuilder("/error")
           .addQuery("error", message)
@@ -112,8 +112,7 @@ const SearchResult = () => {
 
                         <div className="flex">
                           <span className="bg-[#212a41] px-3 py-1 rounded-md my-2 flex items-center justify-center">
-                            {Math.floor(locationData.calculateCitesRoutes)}{" "}
-                            km
+                            {Math.floor(locationData.calculateCitesRoutes)} km
                           </span>
                         </div>
 
@@ -140,7 +139,9 @@ const SearchResult = () => {
                   <div className="result">
                     Date:{" "}
                     <span className="text-xs">
-                      {new Date(urlData?.date?.split('"')[1]).toLocaleString()}
+                      {new Date(
+                        urlData?.date?.split('"')[1],
+                      ).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="result">

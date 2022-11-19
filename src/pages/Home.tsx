@@ -1,46 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   CalendarStyle,
   Combobox,
   Select,
   SelectNumberInput,
-} from "../components";
-import useInputData, { InitialStateUserInput } from "../hooks/useInputData";
-import useValidateInput from "../hooks/useValidateInput";
-import { checkIfObjMissingValues } from "../utils/checkIfObjIsEmpty";
-import { QueryBuilder } from "../utils/QueryBuilder";
+} from "../components"
+import useInputData, { InitialStateUserInput } from "../hooks/useInputData"
+import useValidateInput from "../hooks/useValidateInput"
+import { checkIfObjMissingValues } from "../utils/checkIfObjIsEmpty"
+import { QueryBuilder } from "../utils/QueryBuilder"
 
 const Home = () => {
-  const { state, actions } = useInputData();
+  const { state, actions } = useInputData()
   const { getInvalidInput, isTouched, validateInput, isValid } =
-    useValidateInput(state);
-  const [disableButton, setDisableButton] = useState<boolean>(true);
+    useValidateInput(state)
+  const [disableButton, setDisableButton] = useState<boolean>(true)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handelOnsubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!validateInput()) return;
+    if (!validateInput()) return
 
-    navigateToOther(state);
-  };
+    navigateToOther(state)
+  }
 
   const navigateToOther = (stateChange: InitialStateUserInput) => {
-    const query = new QueryBuilder("/search-results");
+    const query = new QueryBuilder("/search-results")
 
     for (var obj in stateChange) {
-      query.addQuery(obj, stateChange[obj as keyof InitialStateUserInput]);
+      query.addQuery(obj, stateChange[obj as keyof InitialStateUserInput])
     }
 
-    navigate(query.getQueryPath());
-  };
+    navigate(query.getQueryPath())
+  }
 
   useEffect(() => {
-
-    setDisableButton(checkIfObjMissingValues(state));
-  }, [state]);
+    setDisableButton(checkIfObjMissingValues(state))
+  }, [state])
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-white">
@@ -110,7 +109,7 @@ const Home = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

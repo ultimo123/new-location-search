@@ -25,27 +25,6 @@
   width: 100%;
   height: 100%;
 }
-.css-njviow-control {
-  background: none !important;
-  border-color: rgb(107 114 128 / 1) !important;
-}
-
-.css-1gu2dqn-container:focus-within {
-  border: 1px solid rgb(59, 130, 246);
-}
-
-.css-njviow-control:focus {
-  box-shadow: none !important;
-}
-
-.css-qc6sy-singleValue {
-  color: white !important;
-  mix-blend-mode: difference;
-}
-
-.css-14el2xx-placeholder {
-  color: rgb(156 163 175 / 1) !important;
-}
 
 .react-calendar__month-view__weekdays {
   text-align: center;

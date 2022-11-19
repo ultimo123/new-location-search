@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import { clickOutside } from "../utils/outSideClick";
-import Select from "./InputWrapper";
+import React, { useEffect, useRef, useState } from "react"
+import { clickOutside } from "../utils/outSideClick"
+import Select from "./InputWrapper"
 
 interface optionsSelect {
-  label: string | number;
-  value: string | number;
+  label: string | number
+  value: string | number
 }
 interface customComboBox {
-  className: string;
-  onChange: (n: optionsSelect | Array<optionsSelect>) => void;
-  isMulti: boolean;
-  loadOptions: (n: string) => Promise<Array<optionsSelect>>;
-  placeholder: string;
-  isClearable: boolean;
+  className: string
+  onChange: (n: optionsSelect | Array<optionsSelect>) => void
+  isMulti: boolean
+  loadOptions: (n: string) => Promise<Array<optionsSelect>>
+  placeholder: string
+  isClearable: boolean
   error: {
-    error: boolean;
-    message: string;
-  };
+    error: boolean
+    message: string
+  }
 }
 
 const ComboCustom = ({
@@ -28,100 +28,100 @@ const ComboCustom = ({
   placeholder,
   error,
 }: customComboBox) => {
-  const [isLoading, setIsLoading] = useState(0);
-  const [valuesOut, setValuesOut] = useState<Array<string>>([]);
-
+  const [isLoading, setIsLoading] = useState(0)
+  const [valuesOut, setValuesOut] = useState<Array<string>>([])
   const [optionsSelect, setOptionsSelect] = useState<string | Array<string>>(
-    isMulti ? [] : ""
-  );
-
-  const [isOpen, setIsOpen] = useState(false);
+    isMulti ? [] : "",
+  )
+  const [isOpen, setIsOpen] = useState(false)
   const [multiSelectOptions, setMultiSelectOptions] = useState<Array<string>>(
-    []
-  );
+    [],
+  )
 
-  const preventInit = useRef(true);
+  const preventInit = useRef(true)
 
   const loadOptionsChange = async (e: any) => {
-    const value = e;
-    setIsLoading((n) => n + 1);
-    const values = await loadOptions(value);
-    values && setValuesOut(values.map((n) => n.value) as Array<string>);
-    setIsLoading((n) => n - 1);
-  };
+    const value = e
+    setIsLoading((n) => n + 1)
+    const values = await loadOptions(value)
+    values && setValuesOut(values.map((n) => n.value) as Array<string>)
+    setIsLoading((n) => n - 1)
+  }
 
   const onchangeOptions = (e: any) => {
-    const value = e.target.value;
-    loadOptionsChange(value);
+    const value = e.target.value
+    loadOptionsChange(value)
     setOptionsSelect((n) => {
       if (isMulti) {
-        return value;
+        return value
       } else {
-        return value;
+        return value
       }
-    });
-  };
+    })
+  }
 
   const onselectOption = (value: string) => {
-    setIsOpen(false);
-    setValuesOut([]);
+    setIsOpen(false)
+    setValuesOut([])
     setOptionsSelect((n) => {
       if (isMulti) {
-        return n;
+        return n
       } else {
-        return value;
+        return value
       }
-    });
+    })
+
     if (isMulti) {
-      setOptionsSelect("");
-      setMultiSelectOptions((n) => [...n, value]);
+      setOptionsSelect("")
+      setMultiSelectOptions((n) => [...n, value])
     }
-  };
+  }
 
   const formatOptions = (option: string) => {
     return {
       label: option,
       value: option,
-    };
-  };
+    }
+  }
   const formatOptionsList = (option: Array<string>) => {
-    return option.map((n) => formatOptions(n));
-  };
+    return option.map((n) => formatOptions(n))
+  }
 
   const onChangeMapper = () => {
     onChange(
       !isMulti
         ? formatOptions(optionsSelect as string)
-        : formatOptionsList(multiSelectOptions)
-    );
-  };
+        : formatOptionsList(multiSelectOptions),
+    )
+  }
 
   const deleteMultySelect = (filter: string) => {
-    setMultiSelectOptions((n) => n.filter((x) => x != filter));
-  };
+    setMultiSelectOptions((n) => n.filter((x) => x != filter))
+  }
+
   const clearValues = () => {
     isMulti
       ? onChange([{ label: "", value: "" }])
-      : onChange({ label: "", value: "" });
-    setOptionsSelect(isMulti ? [] : "");
-    setMultiSelectOptions([]);
-  };
+      : onChange({ label: "", value: "" })
+    setOptionsSelect(isMulti ? [] : "")
+    setMultiSelectOptions([])
+  }
 
   useEffect(() => {
     if (!preventInit.current) {
-      onChangeMapper();
+      onChangeMapper()
     }
-    preventInit.current = false;
-  }, [multiSelectOptions, optionsSelect]);
+    preventInit.current = false
+  }, [multiSelectOptions, optionsSelect])
 
   return (
     <Select
       className={`${className} relative`}
       onClick={(e) => {
-        setIsOpen(true);
+        setIsOpen(true)
         clickOutside(() => {
-          setIsOpen(false);
-        }, e).addOnclick();
+          setIsOpen(false)
+        }, e).addOnclick()
       }}
     >
       {isMulti &&
@@ -135,7 +135,7 @@ const ComboCustom = ({
             {"         "}
             <span
               onClick={() => {
-                deleteMultySelect(selectOption);
+                deleteMultySelect(selectOption)
               }}
               className=""
             >
@@ -166,7 +166,7 @@ const ComboCustom = ({
           isOpen && (
             <div
               onClick={(e) => {
-                e.stopPropagation();
+                e.stopPropagation()
               }}
               className="bg-gray-800 rounded-md"
             >
@@ -190,7 +190,7 @@ const ComboCustom = ({
         )}
       </div>
     </Select>
-  );
-};
+  )
+}
 
-export default ComboCustom;
+export default ComboCustom
