@@ -1,12 +1,5 @@
 import { CityLocation } from "../api/calculateCityApi/services"
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-  Marker,
-  Popup,
-  Polyline,
-} from "react-leaflet"
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import L, { Icon, latLng } from "leaflet"
 import locationDrop from "../assets/locationDrop.png"

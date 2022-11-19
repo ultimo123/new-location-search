@@ -7,6 +7,7 @@ import MapDisplay from "../components/MapDisplay"
 import { toast } from "react-hot-toast"
 import { inputValidation } from "../validation/validationFunc"
 import { CalculateCityApi } from "../api/calculateCityApi/CalculateCityApi"
+import { LeftRight } from "../components/Animations"
 
 interface ApiResultData {
   distance2Cites: CityLocation
@@ -73,9 +74,12 @@ const SearchResult = () => {
   return (
     <div className="flex items-center justify-between h-screen py-10 pb-10 overflow-y-scroll md:overflow-hidden">
       {!loading && (
-        <div className="flex flex-col h-full my-12 md:flex-row gap-20 mx-14 w-full">
+        <div className="flex flex-col h-full justify-center my-12 md:flex-row gap-20 mx-14 w-full">
           {locationData && (
-            <div className="flex flex-row md:items-center flex-[0.5] items-start">
+            <LeftRight
+              direction="left"
+              className="flex flex-row md:items-center flex-[0.6] items-start"
+            >
               <div className="p-2 m-5 text-white">
                 <div className="flex flex-row h-full">
                   <div className="flex flex-col h-full">
@@ -171,14 +175,19 @@ const SearchResult = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </LeftRight>
           )}
 
           {locationData && (
-            <MapDisplay
-              className="w-full min-h-[520px]  md:flex-[0.6]"
-              locationData={locationData}
-            />
+            <LeftRight
+              direction="right"
+              className="w-full min-h-[520px] flex flex-col justify-center"
+            >
+              <MapDisplay
+                className="w-full min-h-[520px]  md:flex-[0.6]"
+                locationData={locationData}
+              />
+            </LeftRight>
           )}
         </div>
       )}

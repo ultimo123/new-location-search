@@ -1,6 +1,6 @@
 type InputProps = {
-  children: any
-  className?: any
+  children: React.ReactNode
+  className?: string
   onClick?: (n: any) => void
 }
 

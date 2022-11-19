@@ -38,6 +38,7 @@ const Combobox = ({
           value: n[0],
         }
       })
+
       return dataOptionDropdown
     } else {
       setError({

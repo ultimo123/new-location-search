@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+import Loader from "../assets/Loader"
 import { clickOutside } from "../utils/outSideClick"
 import Select from "./InputWrapper"
 
@@ -30,9 +31,11 @@ const ComboCustom = ({
 }: customComboBox) => {
   const [isLoading, setIsLoading] = useState(0)
   const [valuesOut, setValuesOut] = useState<Array<string>>([])
+
   const [optionsSelect, setOptionsSelect] = useState<string | Array<string>>(
     isMulti ? [] : "",
   )
+
   const [isOpen, setIsOpen] = useState(false)
   const [multiSelectOptions, setMultiSelectOptions] = useState<Array<string>>(
     [],
@@ -70,7 +73,6 @@ const ComboCustom = ({
         return value
       }
     })
-
     if (isMulti) {
       setOptionsSelect("")
       setMultiSelectOptions((n) => [...n, value])
@@ -98,7 +100,6 @@ const ComboCustom = ({
   const deleteMultySelect = (filter: string) => {
     setMultiSelectOptions((n) => n.filter((x) => x != filter))
   }
-
   const clearValues = () => {
     isMulti
       ? onChange([{ label: "", value: "" }])
@@ -149,6 +150,8 @@ const ComboCustom = ({
         value={optionsSelect}
         placeholder={multiSelectOptions?.length === 0 ? placeholder : ""}
       />
+      {!!isLoading && <Loader className="w-10 h-3" />}
+
       {isClearable && (
         <span
           className="cursor-pointer p-[2px]  px-2 bg-gray-700 rounded-md hover:bg-opacity-70 flex items-center justify-center"
