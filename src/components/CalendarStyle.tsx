@@ -1,29 +1,29 @@
-import { ChangeEvent, useState } from "react";
-import Calendar, { OnChangeDateCallback } from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { InputProps } from "../typings";
-import { clickOutside } from "../utils/outSideClick";
-import InputWrapper from "./InputWrapper";
-import Invalid from "./Invalid";
+import { ChangeEvent, useState } from "react"
+import Calendar, { OnChangeDateCallback } from "react-calendar"
+import "react-calendar/dist/Calendar.css"
+import { InputProps } from "../typings"
+import { clickOutside } from "../utils/outSideClick"
+import InputWrapper from "./InputWrapper"
+import Invalid from "./Invalid"
 
 const CalendarStyle = ({ stateManager, className, validation }: InputProps) => {
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const { onChange, value } = stateManager;
+  const [openCalendar, setOpenCalendar] = useState(false)
+  const { onChange, value } = stateManager
 
   const handelChangeDate = (value: Date, e: ChangeEvent<HTMLInputElement>) => {
-    onChange(value);
-    setOpenCalendar(false);
-  };
+    onChange(value)
+    setOpenCalendar(false)
+  }
 
   return (
     <div>
       <InputWrapper
         className={`${className} ${validation.valid ? "" : "bg-black"}`}
         onClick={(e) => {
-          setOpenCalendar((prev) => !prev);
+          setOpenCalendar((prev) => !prev)
           clickOutside(() => {
-            setOpenCalendar(false);
-          }, e).addOnclick();
+            setOpenCalendar(false)
+          }, e).addOnclick()
         }}
       >
         <div className="cursor-pointer -ml-3">
@@ -41,7 +41,7 @@ const CalendarStyle = ({ stateManager, className, validation }: InputProps) => {
             {openCalendar && (
               <div
                 onClick={(e) => {
-                  e.stopPropagation();
+                  e.stopPropagation()
                 }}
               >
                 <Calendar
@@ -56,10 +56,9 @@ const CalendarStyle = ({ stateManager, className, validation }: InputProps) => {
           </div>
         </div>
       </InputWrapper>
-
       <Invalid validations={validation} />
     </div>
-  );
-};
+  )
+}
 
-export default CalendarStyle;
+export default CalendarStyle
