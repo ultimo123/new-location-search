@@ -66,7 +66,7 @@ const Combobox = ({
     if (!isArraySelect) {
       return !touched || !value
     } else {
-      return !touched || (value as Array<string>).length === 0
+      return !touched || (value as any).length === 0
     }
   }
 

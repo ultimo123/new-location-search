@@ -140,7 +140,7 @@ const SearchResult = () => {
                     Date:{" "}
                     <span className="text-xs">
                       {new Date(
-                        urlData?.date?.split('"')[1],
+                        (urlData?.date as any)?.split('"')[1],
                       ).toLocaleDateString()}
                     </span>
                   </div>
